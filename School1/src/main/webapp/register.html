@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register Page</title>
+    <style>
+        body {
+            background-image: url(https://cdn.pixabay.com/photo/2018/07/05/16/59/students-3518726_1280.jpg);
+            background-size: cover;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: rgba(128, 187, 210, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+            width: 90%;
+            max-width: 500px;
+            max-height: 95vh;
+            overflow-y: auto;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin: 0 0 15px 0;
+            font-size: 1.5rem;
+        }
+        .form-row {
+            display: flex;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        label {
+            width: 120px;
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 0.9rem;
+        }
+        input, select {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            background: rgb(207, 241, 255);
+            font-size: 0.9rem;
+            min-width: 0;
+        }
+        input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            width: 100%;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+        }
+        
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .popup-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .success-message {
+            color: #28a745;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .error-message {
+            color: #dc3545;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .popup-close {
+            padding: 8px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 480px) {
+            .form-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            label {
+                margin-bottom: 5px;
+                width: 100%;
+            }
+            input, select {
+                width: 100%;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Student Registration</h2>
+         <form id="registerForm" action="RegisterServlet" method="POST">
+            <div class="form-row">
+                <label for="id">Student ID:</label>
+                <input type="number" id="id" name="id" required>
+            </div>
+            <div class="form-row">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-row">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" min="5" max="30" required>
+            </div>
+            <div class="form-row">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Select</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            <div class="form-row">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-row">
+                <label for="mobile">Mobile:</label>
+                <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" required>
+            </div>
+            <div class="form-row">
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+            <div class="form-row">
+                <label for="class">Class:</label>
+                <select id="class" name="class" required>
+                    <option value="">Select</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <input type="submit" value="Register">
+            </div>
+        </form>
+    </div>
+    
+    
+    <div id="successPopup" class="popup">
+        <div class="popup-content">
+            <p class="success-message">Student registered successfully!</p>
+            <button class="popup-close" onclick="closePopup('successPopup')">OK</button>
+        </div>
+    </div>
+    
+    <!-- Error Popup -->
+    <div id="errorPopup" class="popup">
+        <div class="popup-content">
+            <p class="error-message">Student ID already exists. Please use a different ID.</p>
+            <button class="popup-close" onclick="closePopup('errorPopup')">OK</button>
+        </div>
+    </div>
+    
+    
+     <script>
+        // Check URL parameters when page loads
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const success = urlParams.get('success');
+            const error = urlParams.get('error');
+            
+            if (success === 'registered') {
+                showSuccessPopup();
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 1000);
+            } else if (error === 'duplicate_id') {
+                showErrorPopup();
+            }
+        };
+        
+        function showSuccessPopup() {
+            const popup = document.getElementById('successPopup');
+            popup.style.display = 'flex';
+            
+            // Auto-hide after 3 seconds
+            setTimeout(() => {
+                popup.style.display = 'none';
+                // Reset form after successful registration
+                document.getElementById('registerForm').reset();
+            }, 3000);
+        }
+        
+        function showErrorPopup() {
+            document.getElementById('errorPopup').style.display = 'flex';
+        }
+        
+        function closePopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+        }
+    </script>
+    
+</body>
+</html>
