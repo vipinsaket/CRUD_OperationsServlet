@@ -11,7 +11,7 @@ import java.util.List;
 import Entity.Student;
 
 public class Conn {
-	private static String url="jdbc:postgresql://localhost:5432/school1result?user=postgres&password=123";
+	private static String url="jdbc:postgresql://localhost:5432/school1result?user=postgres&password=********";
 	private static  Connection con;
 	static {
 		try {
